@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Heart Animaton</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      --main-color: #dc143c;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: rgb(7, 7, 20);
+    }
+    .grayheart {
+      background-color: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100px;
+      width: 100px;
+      position: relative;
+      top: 0;
+      transform: rotate(-45deg);
+    }
+
+    .grayheart:before,
+    .grayheart:after {
+      content: "";
+      background-color: #ccc;
+      border-radius: 50%;
+      height: 100px;
+      width: 100px;
+      position: absolute;
+    }
+    .grayheart::before {
+      top: -50px;
+    }
+    .grayheart::after {
+      left: 50px;
+      top: 0;
+    }
+
+    /* red heart */
+    .redheart {
+      background-color: var(--main-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+      width: 100px;
+      position: absolute;
+      transform: rotate(-45deg);
+      visibility: hidden;
+    }
+
+    .redheart::before,
+    .redheart::after {
+      content: "";
+      background-color: var(--main-color);
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      position: absolute;
+    }
+
+    .redheart::before {
+      top: -50px;
+      left: 0;
+    }
+
+    .redheart::after {
+      left: 50px;
+      top: 0;
+    }
+
+    /* Real Animation */
+
+    .redheart.animation {
+      animation: pop 0.9s linear;
+      visibility: visible;
+    }
+
+    .redheart.fil_color {
+      background-color: var(--main-color);
+    }
+
+    @keyframes pop {
+      100% {
+        transform: scale(2) rotate(-45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+  <body>
+    <div class="grayheart"></div>
+    <div class="redheart"></div>
+  </body>
+  <script>
+    const grayheart = document.querySelector(".grayheart");
+    const redheart = document.querySelector(".redheart");
+
+    grayheart.addEventListener("click", () => {
+      redheart.classList.add("animation");
+      grayheart.classList.add("fil_color");
+    });
+
+    redheart.addEventListener("click", () => {
+      redheart.classList.remove("animation");
+      grayheart.classList.remove("fil_color");
+    });
+  </script>
+</html>
