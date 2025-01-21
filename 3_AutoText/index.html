@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Txt</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        height: 100vh;
+        background-color: black;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    p {
+        font-size: 3rem;
+    }
+
+    .js {
+        color: yellow;
+    }
+    .typedTxt {
+        color: #20c20a;
+    }
+    .cursor {
+        background-color: #20c20e;
+    }
+</style>
+<body>
+    <p>
+        <span class="js">JavaScript</span> is <span class="typedTxt"></span>
+        <span class="cursor">&nbsp;</span>
+    </p>
+</body>
+<script>
+    const typedTxt = document.querySelector('.typedTxt')
+    const cursor = document.querySelector('.cursor')
+
+    let words = ['Awesome', 'Fun', 'Cool', 'Life', 'Easy', 'Famous']
+
+    const typingdelay = 150
+    const erasingdelay = 150
+    const newLetterDelay = 2000 
+    let index = 0;
+    let charIndex = 0;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        if (words.length) {
+            setTimeout(type, newLetterDelay)            
+        }
+    })
+    
+    function type() {
+        if (charIndex < words[index].length) {
+            typedTxt.textContent += words[index].charAt(charIndex)
+            charIndex++
+            setTimeout(type, typingdelay)
+        } else {
+            setTimeout(erase, newLetterDelay)
+        }
+        
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            typedTxt.textContent = words[index].substring(0, charIndex -1)            
+            charIndex--
+            setTimeout(erase, erasingdelay)
+        } else {
+            index++
+            if (index >= words.length) {
+                index = 0                
+            }
+            setTimeout(type, typingdelay + 1100)
+        }
+    }
+
+</script>
+</html>
